@@ -61,6 +61,10 @@ public class ArcGISOnlineService {
         HttpResponse response = request.execute();
 
         token = response.parseAs(Token.class);
+
+        if (token.token == null) {
+            throw new IllegalArgumentException("Invalid username and password, please try again.");
+        }
     }
 
     public Users getNewUsersFromPastWeek() throws IOException {

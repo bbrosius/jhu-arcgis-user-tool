@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.jhu.gis.usertool.Controller;
@@ -18,6 +19,7 @@ public class LoginPresenter {
 
     public TextField usernameField;
     public PasswordField passwordField;
+    public Label errorMessage;
 
     private Node loginView = null;
     private Controller controller;
@@ -40,7 +42,13 @@ public class LoginPresenter {
     }
 
     public void loginAction(ActionEvent actionEvent) throws IOException {
+        errorMessage.setVisible(false);
         LoginCredential credential = new LoginCredential(usernameField.getText(), passwordField.getText());
         controller.handleLogin(credential);
+    }
+
+    public void handleError(String message) {
+        errorMessage.setVisible(true);
+        errorMessage.setText(message);
     }
 }

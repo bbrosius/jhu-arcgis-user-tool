@@ -36,17 +36,11 @@ public class UserPresenter {
     public UserPresenter() {
     }
 
-    public Node display(LoginCredential credential) throws IOException {
+    public Node display(ArcGISOnlineService service) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/user_view.fxml"), ResourceBundle.getBundle("bundles/labels", Locale.getDefault()));
         loader.setController(this);
-
-        try {
-            service = new ArcGISOnlineService(credential);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        this.service = service;
         if (userView == null) {
             userView = loader.load();
         }
